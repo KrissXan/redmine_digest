@@ -4,7 +4,7 @@ This plugin enables you to send and receive daily, weekly and monthly Redmine di
 
 ## Compatibility
 
-This plugin version is compatible only with Redmine 3.x and later.
+This plugin version is compatible only with Redmine 5.x.
 
 ## Installation
 
@@ -21,8 +21,8 @@ This plugin requires Redmine Select2 Plugin to be installed.
             
       Copy the plugins from GitHub using the following commands:
       
-            git clone https://github.com/KrissXan/redmine__select2 plugins/redmine__select2
-            git clone https://github.com/KrissXan/redmine_digest plugins/redmine_digest
+            git clone https://github.com/KrissXan/redmine__select2.git plugins/redmine__select2
+            git clone https://github.com/KrissXan/redmine_digest.git plugins/redmine_digest
             
 2. Install the required gems using the command:  
 
