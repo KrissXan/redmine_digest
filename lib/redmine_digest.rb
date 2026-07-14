@@ -9,8 +9,6 @@ require_dependency 'redmine_digest/patches/my_controller_patch'
 require_dependency 'redmine_digest/patches/issue_patch'
 require_dependency 'redmine_digest/patches/journal_patch'
 
-ActionDispatch::Callbacks.to_prepare do
-
   unless Project.included_modules.include? RedmineDigest::Patches::ProjectPatch
     Project.send :include, RedmineDigest::Patches::ProjectPatch
   end
@@ -30,6 +28,3 @@ ActionDispatch::Callbacks.to_prepare do
   unless Journal.included_modules.include?(RedmineDigest::Patches::JournalPatch)
     Journal.send :include, RedmineDigest::Patches::JournalPatch
   end
-
-end
-

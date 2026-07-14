@@ -26,9 +26,6 @@ class DigestRule < ActiveRecord::Base
   serialize :project_ids, Array
   serialize :event_ids
 
-  attr_accessible :active, :name, :raw_project_ids, :project_selector,
-                  :notify, :recurrent, :event_ids, :move_to, :template
-
   validates :name, presence: true
   validates :project_selector, inclusion: { in: PROJECT_SELECTOR_VALUES }
   validates :notify, inclusion: { in: NOTIFY_OPTIONS }
@@ -69,7 +66,7 @@ class DigestRule < ActiveRecord::Base
     Project.
       joins(:memberships).
       where(get_projects_scope).
-      uniq.pluck('projects.id')
+      distinct.pluck('projects.id')
   end
 
   def calculate_time_from(time_to)
@@ -162,7 +159,7 @@ class DigestRule < ActiveRecord::Base
       when MEMBER_NOT_SELECTED
         ['members.user_id = ? and projects.id not in (?)', user.id, project_ids]
       else
-        raise RedmineDigest::Error.new "Unknown project selector (#{project_selector})"
+        raise RedmineDigest::DigestError.new "Unknown project selector (#{project_selector})"
     end
   end
 

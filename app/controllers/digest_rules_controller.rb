@@ -2,14 +2,14 @@ class DigestRulesController < ApplicationController
 
   PREVIEW_ISSUE_LIMIT = 20
 
-  before_filter :set_user
+  before_action :set_user
 
   def new
     @digest_rule = @user.digest_rules.build
   end
 
   def create
-    @digest_rule = @user.digest_rules.build(params[:digest_rule])
+    @digest_rule = @user.digest_rules.build(digest_rule_params)
     if @digest_rule.save
       redirect_to controller: 'my', action: 'account'
     else
@@ -23,7 +23,7 @@ class DigestRulesController < ApplicationController
 
   def update
     @digest_rule = @user.digest_rules.find(params[:id])
-    if @digest_rule.update_attributes(params[:digest_rule])
+    if @digest_rule.update(digest_rule_params)
       redirect_to controller: 'my', action: 'account'
     else
       render action: 'edit'
@@ -46,5 +46,12 @@ class DigestRulesController < ApplicationController
 
   def set_user
     @user = User.current
+  end
+
+  def digest_rule_params
+    params.require(:digest_rule).permit(
+      :active, :name, :raw_project_ids, :project_selector,
+      :notify, :recurrent, :event_ids, :move_to, :template
+    )
   end
 end
