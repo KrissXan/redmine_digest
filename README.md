@@ -4,7 +4,7 @@ This plugin enables you to send and receive daily, weekly and monthly Redmine di
 
 ## Compatibility
 
-This plugin version is compatible only with Redmine 5.x.
+This plugin version is compatible only with Redmine 5.1.x
 
 ## Installation
 
