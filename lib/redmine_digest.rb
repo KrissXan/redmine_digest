@@ -28,3 +28,9 @@ require_dependency 'redmine_digest/patches/journal_patch'
   unless Journal.included_modules.include?(RedmineDigest::Patches::JournalPatch)
     Journal.send :include, RedmineDigest::Patches::JournalPatch
   end
+
+Rails.application.config.after_initialize do
+  if I18n.backend.instance_variable_defined?(:@available_locales)
+    I18n.backend.instance_variable_set(:@available_locales, nil)
+  end
+end
